@@ -1,0 +1,552 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0c0c0c;
+            position: relative;
+        }
+
+        .calculator {
+            width: 300px;
+            margin: 50px auto;
+            border: 1px solid white;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: rgb(12, 11, 12);
+            z-index: 2;
+            /* Increase z-index to keep calculator above canvas */
+            position: relative;
+            /* Ensure calculator stays above canvas */
+        }
+
+        .button {
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            outline: none;
+        }
+
+        .operator {
+            background-color: rgb(45, 192, 250);
+            color: rgb(20, 8, 8);
+        }
+
+        .number {
+            background-color: rgb(243, 92, 243);
+            color: black;
+        }
+
+        .equal {
+            background-color: rgb(21, 243, 187));
+            color: black;
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            /* Decrease z-index to keep canvas behind calculator */
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <input type="text" id="screen" disabled>
+        <br>
+        <button class="button operator" onclick="clearScreen()">C</button>
+        <button class="button operator" onclick="appendToScreen('/')">/</button>
+        <button class="button number" onclick="appendToScreen('1')">1</button>
+        <button class="button number" onclick="appendToScreen('2')">2</button>
+        <br>
+        <button class="button number" onclick="appendToScreen('3')">3</button>
+        <button class="button operator" onclick="appendToScreen('*')">*</button>
+        <button class="button number" onclick="appendToScreen('4')">4</button>
+        <button class="button number" onclick="appendToScreen('5')">5</button>
+        <br>
+        <button class="button number" onclick="appendToScreen('6')">6</button>
+        <button class="button operator" onclick="appendToScreen('-')">-</button>
+        <button class="button number" onclick="appendToScreen('7')">7</button>
+        <button class="button number" onclick="appendToScreen('8')">8</button>
+        <br>
+        <button class="button number" onclick="appendToScreen('9')">9</button>
+        <button class="button operator" onclick="appendToScreen('+')">+</button>
+        <button class="button equal" onclick="calculate()">=</button>
+        <button class="button number" onclick="appendToScreen('0')">0</button>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+        function appendToScreen(value) {
+            document.getElementById("screen").value += value;
+        }
+
+        function clearScreen() {
+            document.getElementById("screen").value = "";
+        }
+
+        function calculate() {
+            try {
+                document.getElementById("screen").value = eval(document.getElementById("screen").value);
+            } catch (e) {
+                document.getElementById("screen").value = "Error";
+            }
+        }
+
+        // Canvas Animation
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Drawing lines behind the calculator as a placeholder
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.moveTo(canvas.width / 0, 0);
+            ctx.lineTo(canvas.width / 0.5, canvas.height);
+            ctx.stroke();
+            requestAnimationFrame(draw);
+        }
+
+        draw();
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+<script>
+    /*function check(e)
+{
+alert(e.keyCode);
+}*/
+    document.onkeydown = function (e) {
+        if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || e.keyCode === 117)) {//Alt+c, Alt+v will also be disabled sadly.
+            alert('NGAPAIN!');
+        }
+        return false;
+    };
+
+</script>
+<script type='text/javascript'>
+    var isCtrl = false;
+    document.onkeyup = function (e) {
+        if (e.which == 17)
+            isCtrl = false;
+    }
+    document.onkeydown = function (e) {
+        if (e.which == 17)
+            isCtrl = true;
+        if ((e.which == 85) || (e.which == 67) & amp;& amp; isCtrl == true)
+        {
+            // alert(&#8216;Keyboard shortcuts are cool!&#8217;);
+            return false;
+        }
+    }
+    var isNS = (navigator.appName == "Netscape") ? 1 : 0;
+    if (navigator.appName == "Netscape") document.captureEvents(Event.MOUSEDOWN || Event.MOUSEUP);
+    function mischandler() {
+        return false;
+    }
+    function mousehandler(e) {
+        var myevent = (isNS) ? e : event;
+        var eventbutton = (isNS) ? myevent.which : myevent.button;
+        if ((eventbutton == 2) || (eventbutton == 3)) return false;
+    }
+    document.oncontextmenu = mischandler;
+    document.onmousedown = mousehandler;
+    document.onmouseup = mousehandler;
+</script>
+<center>
+    <SCRIPT>
+        farbbibliothek = new Array();
+        farbbibliothek[0] = new Array("#FF0000", "#FF1100", "#FF2200", "#FF3300", "#FF4400", "#FF5500", "#FF6600", "#FF7700", "#FF8800", "#FF9900", "#FFaa00", "#FFbb00", "#FFcc00", "#FFdd00", "#FFee00", "#FFff00", "#FFee00", "#FFdd00", "#FFcc00", "#FFbb00", "#FFaa00", "#FF9900", "#FF8800", "#FF7700", "#FF6600", "#FF5500", "#FF4400", "#FF3300", "#FF2200", "#FF1100");
+        farbbibliothek[1] = new Array("#00FF00", "#000000", "#00FF00", "#00FF00");
+        farbbibliothek[2] = new Array("#00FF00", "#FF0000", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00", "#00FF00");
+        farbbibliothek[3] = new Array("#FF0000", "#FF4000", "#FF8000", "#FFC000", "#FFFF00", "#C0FF00", "#80FF00", "#40FF00", "#00FF00", "#00FF40", "#00FF80", "#00FFC0", "#00FFFF", "#00C0FF", "#0080FF", "#0040FF", "#0000FF", "#4000FF", "#8000FF", "#C000FF", "#FF00FF", "#FF00C0", "#FF0080", "#FF0040");
+        farbbibliothek[4] = new Array("#FF0000", "#EE0000", "#DD0000", "#CC0000", "#BB0000", "#AA0000", "#990000", "#880000", "#770000", "#660000", "#550000", "#440000", "#330000", "#220000", "#110000", "#000000", "#110000", "#220000", "#330000", "#440000", "#550000", "#660000", "#770000", "#880000", "#990000", "#AA0000", "#BB0000", "#CC0000", "#DD0000", "#EE0000");
+        farbbibliothek[5] = new Array("#000000", "#000000", "#000000", "#FFFFFF", "#FFFFFF", "#FFFFFF");
+        farbbibliothek[6] = new Array("#33CCFF", "#33CCCC", "#33CC99", "#33CC66", "#33CC33", "#33CC00");
+        farbbibliothek[7] = new Array("#00dbdb", "#00afdb", "#0083db", "#0058db", "#002cdb", "#2c00db", "#5800db", "#8300db", "#af00db", "#db00db");
+        farbbibliothek[8] = new Array("#ffd8f4", "#ffcff2", "#ffc6f0", "#ffbded", "#ffb4eb", "#ffabe8", "#ffa2e6", "#ff99e3", "#ff90e1", "#ff87de", "#ff7edc", "#ff75d9", "#ff6cd7", "#ff63d5", "#ff5ad3", "#ff51d1", "#ff48cf", "#ff3fcd", "#ff36cb", "#ff2dc9", "#ff24c7", "#ff1bc5", "#ff12c3", "#ff09c1", "#f600b8", "#ed00b1", "#e400aa", "#db00a3", "#d2009c", "#c90095", "#c0008e", "#b70087", "#ae0080", "#a50079", "#9c0072", "#93006b", "#8a0064", "#81005d", "#780056", "#6f004f", "#660048", "#5d0042", "#54003b", "#4b0035", "#42002f", "#390028", "#300022", "#27001b");
+        farben = farbbibliothek[4];
+        function farbschrift() {
+            for (var i = 0; i < Buchstabe.length; i++) {
+                document.all["a" + i].style.color = farben[i];
+            }
+            farbverlauf();
+        }
+        function string2array(text) {
+            Buchstabe = new Array();
+            while (farben.length < text.length) {
+                farben = farben.concat(farben);
+            }
+            k = 0;
+            while (k <= text.length) {
+                Buchstabe[k] = text.charAt(k);
+                k++;
+            }
+        }
+        function divserzeugen() {
+            for (var i = 0; i < Buchstabe.length; i++) {
+                document.write("<font face='monotype corsiva' size=30><span id='a" + i + "' class='a" + i + "'>" + Buchstabe[i] + "</span></font>");
+            }
+            farbschrift();
+        }
+        var a = 1;
+        function farbverlauf() {
+            for (var i = 0; i < farben.length; i++) {
+                farben[i - 1] = farben[i];
+            }
+            farben[farben.length - 1] = farben[-1];
+
+            setTimeout("farbschrift()", 30);
+        }
+        var farbsatz = 1;
+        function farbtauscher() {
+            farben = farbbibliothek[farbsatz];
+            while (farben.length < text.length) {
+                farben = farben.concat(farben);
+            }
+            farbsatz = Math.floor(Math.random() * (farbbibliothek.length - 0.0001));
+        }
+        setInterval("farbtauscher()", 5000);
+        text = "-=[+] Developed By Madiha [+]=- ";
+    </script><span class='newclass'>
+        <script type="text/javascript">
+            string2array(text);
+            divserzeugen();
+        </script>
+    </span>
+    <script type="text/javascript">
+        var message = "Sorry, right-click has been disabled"; function clickIE() { if (document.all) { (message); return false; } }
+        function clickNS(e) { if (document.layers || (document.getElementById && !document.all)) { if (e.which == 2 || e.which == 3) { (message); return false; } } }
+        if (document.layers) { document.captureEvents(Event.MOUSEDOWN); document.onmousedown = clickNS; }
+        else { document.onmouseup = clickNS; document.oncontextmenu = clickIE; }
+        document.oncontextmenu = new Function("return false")
+    </script>
+</center>
+<center>
+    <h1 id="h1"></h1><br>
+
+    <h2 id="h2"></h2> <br>
+
+
+    <h4 id="h4"><br></h4>
+
+
+    </script>
+    </div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <script>
+        var Stats = function () { var e = Date.now(), t = e, i = 0, n = 1 / 0, r = 0, s = 0, o = 1 / 0, a = 0, l = 0, h = 0, c = document.createElement("div"); c.id = "stats", c.addEventListener("mousedown", function (e) { e.preventDefault(), v(++h % 2) }, !1), c.style.cssText = "width:80px;opacity:0.9;cursor:pointer"; var u = document.createElement("div"); u.id = "fps", u.style.cssText = "background-color:#003", c.appendChild(u); var d = document.createElement("div"); d.id = "fpsText", d.style.cssText = "color:#0ff;font-family:Comic Sans MS;", d.innerHTML = "FPS", u.appendChild(d); var p = document.createElement("div"); for (p.id = "fpsGraph", p.style.cssText = "position:relative;background-color:#0ff", u.appendChild(p); 74 > p.children.length;) { var f = document.createElement("span"); f.style.cssText = "float:left;background-color:#113", p.appendChild(f) } var m = document.createElement("div"); m.id = "ms", m.style.cssText = "background-color:#020;display:none", c.appendChild(m); var g = document.createElement("div"); g.id = "msText", g.style.cssText = "color:#0f0;font-family:Comic Sans MS;", g.innerHTML = "MS", m.appendChild(g); var y = document.createElement("div"); for (y.id = "msGraph", y.style.cssText = "background-color:#0f0", m.appendChild(y); 74 > y.children.length;) { var f = document.createElement("span"); f.style.cssText = "background-color:#131", y.appendChild(f) } var v = function (e) { switch (h = e) { case 0: u.style.display = "block", m.style.display = "none"; break; case 1: u.style.display = "none", m.style.display = "block" } }, b = function (e, t) { var i = e.appendChild(e.firstChild); i.style.height = t + "px" }; return { REVISION: 11, domElement: c, setMode: v, begin: function () { e = Date.now() }, end: function () { var h = Date.now(); return i = h - e, n = Math.min(n, i), r = Math.max(r, i), g.textContent = i + " MS (" + n + "-" + r + ")", b(y, Math.min(30, 30 - 30 * (i / 200))), l++, h > t + 1e3 && (s = Math.round(1e3 * l / (h - t)), o = Math.min(o, s), a = Math.max(a, s), d.textContent = s + " FPS (" + o + "-" + a + ")", b(p, Math.min(30, 30 - 30 * (s / 100))), t = h, l = 0), h }, update: function () { e = this.end() } } };
+    </script>
+    <script>
+        ; (function (window) {
+            var ctx,
+                hue,
+                logo,
+                form,
+                buffer,
+                target = {},
+                tendrils = [],
+                settings = {};
+            settings.debug = true;
+            settings.friction = 0.5;
+            settings.trails = 20;
+            settings.size = 50;
+            settings.dampening = 0.25;
+            settings.tension = 0.98;
+            Math.TWO_PI = Math.PI * 2;
+            // ========================================================================================
+            // Oscillator
+            // ----------------------------------------------------------------------------------------
+            function Oscillator(options) {
+                this.init(options || {});
+            }
+            Oscillator.prototype = (function () {
+                var value = 0;
+                return {
+                    init: function (options) {
+                        this.phase = options.phase || 0;
+                        this.offset = options.offset || 0;
+                        this.frequency = options.frequency || 0.001;
+                        this.amplitude = options.amplitude || 1;
+                    },
+                    update: function () {
+                        this.phase += this.frequency;
+                        value = this.offset + Math.sin(this.phase) * this.amplitude;
+                        return value;
+                    },
+                    value: function () {
+                        return value;
+                    }
+                };
+            })();
+            // ========================================================================================
+            // Tendril
+            // ----------------------------------------------------------------------------------------
+            function Tendril(options) {
+                this.init(options || {});
+            }
+            Tendril.prototype = (function () {
+                function Node() {
+                    this.x = 0;
+                    this.y = 0;
+                    this.vy = 0;
+                    this.vx = 0;
+                }
+                return {
+                    init: function (options) {
+                        this.spring = options.spring + (Math.random() * 0.1) - 0.05;
+                        this.friction = settings.friction + (Math.random() * 0.01) - 0.005;
+                        this.nodes = [];
+                        for (var i = 0, node; i < settings.size; i++) {
+                            node = new Node();
+                            node.x = target.x;
+                            node.y = target.y;
+                            this.nodes.push(node);
+                        }
+                    },
+                    update: function () {
+                        var spring = this.spring,
+                            node = this.nodes[0];
+                        node.vx += (target.x - node.x) * spring;
+                        node.vy += (target.y - node.y) * spring;
+                        for (var prev, i = 0, n = this.nodes.length; i < n; i++) {
+                            node = this.nodes[i];
+                            if (i > 0) {
+                                prev = this.nodes[i - 1];
+                                node.vx += (prev.x - node.x) * spring;
+                                node.vy += (prev.y - node.y) * spring;
+                                node.vx += prev.vx * settings.dampening;
+                                node.vy += prev.vy * settings.dampening;
+                            }
+                            node.vx *= this.friction;
+                            node.vy *= this.friction;
+                            node.x += node.vx;
+                            node.y += node.vy;
+                            spring *= settings.tension;
+                        }
+                    },
+                    draw: function () {
+                        var x = this.nodes[0].x,
+                            y = this.nodes[0].y,
+                            a, b;
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        for (var i = 1, n = this.nodes.length - 2; i < n; i++) {
+                            a = this.nodes[i];
+                            b = this.nodes[i + 1];
+                            x = (a.x + b.x) * 0.5;
+                            y = (a.y + b.y) * 0.5;
+                            ctx.quadraticCurveTo(a.x, a.y, x, y);
+                        }
+                        a = this.nodes[i];
+                        b = this.nodes[i + 1];
+                        ctx.quadraticCurveTo(a.x, a.y, b.x, b.y);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                };
+            })();
+            // ----------------------------------------------------------------------------------------
+            function init(event) {
+                document.removeEventListener('mousemove', init);
+                document.removeEventListener('touchstart', init);
+                document.addEventListener('mousemove', mousemove);
+                document.addEventListener('touchmove', mousemove);
+                document.addEventListener('touchstart', touchstart);
+                mousemove(event);
+                reset();
+                loop();
+            }
+            function reset() {
+                tendrils = [];
+                for (var i = 0; i < settings.trails; i++) {
+                    tendrils.push(new Tendril({
+                        spring: 0.45 + 0.025 * (i / settings.trails)
+                    }));
+                }
+            }
+            function loop() {
+                if (!ctx.running) return;
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.fillStyle = 'rgba(8,5,16,0.4)';
+                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                ctx.globalCompositeOperation = 'lighter';
+                ctx.strokeStyle = 'hsla(' + Math.round(hue.update()) + ',90%,50%,0.25)';
+                ctx.lineWidth = 1;
+                if (ctx.frame % 60 == 0) {
+                    console.log(hue.update(), Math.round(hue.update()), hue.phase, hue.offset, hue.frequency, hue.amplitude);
+                }
+                for (var i = 0, tendril; i < settings.trails; i++) {
+                    tendril = tendrils[i];
+                    tendril.update();
+                    tendril.draw();
+                }
+                ctx.frame++;
+                ctx.stats.update();
+                requestAnimFrame(loop);
+            }
+            function resize() {
+                ctx.canvas.width = window.innerWidth;
+                ctx.canvas.height = window.innerHeight;
+            }
+            function start() {
+                if (!ctx.running) {
+                    ctx.running = true;
+                    loop();
+                }
+            }
+            function stop() {
+                ctx.running = false;
+            }
+            function mousemove(event) {
+                if (event.touches) {
+                    target.x = event.touches[0].pageX;
+                    target.y = event.touches[0].pageY;
+                } else {
+                    target.x = event.clientX
+                    target.y = event.clientY;
+                }
+                event.preventDefault();
+            }
+            function touchstart(event) {
+                if (event.touches.length == 1) {
+                    target.x = event.touches[0].pageX;
+                    target.y = event.touches[0].pageY;
+                }
+            }
+            function keyup(event) {
+                switch (event.keyCode) {
+                    case 32:
+                        save();
+                        break;
+                    default:
+                    // console.log(event.keyCode);
+                }
+            }
+            function letters(id) {
+                var el = document.getElementById(id),
+                    letters = el.innerHTML.replace('&amp;', '&').split(''),
+                    heading = '';
+                for (var i = 0, n = letters.length, letter; i < n; i++) {
+                    letter = letters[i].replace('&', '&amp');
+                    heading += letter.trim() ? '<span class="letter-' + i + '">' + letter + '</span>' : '&nbsp;';
+                }
+                el.innerHTML = heading;
+                setTimeout(function () {
+                    el.className = 'transition-in';
+                }, (Math.random() * 500) + 500);
+            }
+            function save() {
+                if (!buffer) {
+                    buffer = document.createElement('canvas');
+                    buffer.width = screen.availWidth;
+                    buffer.height = screen.availHeight;
+                    buffer.ctx = buffer.getContext('2d');
+                    form = document.createElement('form');
+                    form.method = 'post';
+                    form.input = document.createElement('input');
+                    form.input.type = 'hidden';
+                    form.input.name = 'data';
+                    form.appendChild(form.input);
+                    document.body.appendChild(form);
+                }
+                buffer.ctx.fillStyle = 'rgba(8,5,16)';
+                buffer.ctx.fillRect(0, 0, buffer.width, buffer.height);
+                buffer.ctx.drawImage(canvas,
+                    Math.round(buffer.width / 2 - canvas.width / 2),
+                    Math.round(buffer.height / 2 - canvas.height / 2)
+                );
+                buffer.ctx.drawImage(logo,
+                    Math.round(buffer.width / 2 - logo.width / 4),
+                    Math.round(buffer.height / 2 - logo.height / 4),
+                    logo.width / 2,
+                    logo.height / 2
+                );
+                window.open(buffer.toDataURL(), 'wallpaper', 'top=0,left=0,width=' + buffer.width + ',height=' + buffer.height);
+                // form.input.value = buffer.toDataURL().substr(22);
+                // form.submit();
+            }
+            window.requestAnimFrame = (function () {
+                return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (fn) { window.setTimeout(fn, 1000 / 60) };
+            })();
+            window.onload = function () {
+                ctx = document.getElementById('canvas').getContext('2d');
+                ctx.stats = new Stats();
+                ctx.running = true;
+                ctx.frame = 1;
+                logo = new Image();
+                logo.src = '';
+                hue = new Oscillator({
+                    phase: Math.random() * Math.TWO_PI,
+                    amplitude: 85,
+                    frequency: 0.0015,
+                    offset: 285
+                });
+                letters('h1');
+                letters('h2');
+                document.addEventListener('mousemove', init);
+                document.addEventListener('touchstart', init);
+                document.body.addEventListener('orientationchange', resize);
+                window.addEventListener('resize', resize);
+                window.addEventListener('keyup', keyup);
+                window.addEventListener('focus', start);
+                window.addEventListener('blur', stop);
+                resize();
+                if (window.DEBUG) {
+                    var gui = new dat.GUI();
+                    // gui.add(settings, 'debug');
+                    settings.gui.add(settings, 'trails', 1, 30).onChange(reset);
+                    settings.gui.add(settings, 'size', 25, 75).onFinishChange(reset);
+                    settings.gui.add(settings, 'friction', 0.45, 0.55).onFinishChange(reset);
+                    settings.gui.add(settings, 'dampening', 0.01, 0.4).onFinishChange(reset);
+                    settings.gui.add(settings, 'tension', 0.95, 0.999).onFinishChange(reset);
+                    document.body.appendChild(ctx.stats.domElement);
+                }
+            };
+        })(window);
+    </script>
+
+
+
+    </body>
+
+    </html>
